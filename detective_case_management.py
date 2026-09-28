@@ -1,4 +1,4 @@
-import json
+import ast
 import os
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -6,11 +6,11 @@ from typing import Dict, List, Optional
 
 DATA_DIR = "data"
 FILES = {
-    "investigators": os.path.join(DATA_DIR, "investigators.json"),
-    "cases": os.path.join(DATA_DIR, "cases.json"),
-    "suspects": os.path.join(DATA_DIR, "suspects.json"),
-    "witnesses": os.path.join(DATA_DIR, "witnesses.json"),
-    "evidence": os.path.join(DATA_DIR, "evidence.json"),
+    "investigators": os.path.join(DATA_DIR, "investigators.txt"),
+    "cases": os.path.join(DATA_DIR, "cases.txt"),
+    "suspects": os.path.join(DATA_DIR, "suspects.txt"),
+    "witnesses": os.path.join(DATA_DIR, "witnesses.txt"),
+    "evidence": os.path.join(DATA_DIR, "evidence.txt"),
 }
 
 
@@ -19,25 +19,31 @@ FILES = {
 # ============================================================
 
 def ensure_data_directory():
+    """Create the data folder and plain-text data files when needed."""
     os.makedirs(DATA_DIR, exist_ok=True)
     for path in FILES.values():
         if not os.path.exists(path):
             with open(path, "w", encoding="utf-8") as file:
-                json.dump([], file, indent=4)
+                file.write("[]")
 
 
 def load_data(path: str) -> list:
+    """Read a list of Python data from a normal text file."""
     try:
         with open(path, "r", encoding="utf-8") as file:
-            data = json.load(file)
+            content = file.read().strip()
+            if not content:
+                return []
+            data = ast.literal_eval(content)
             return data if isinstance(data, list) else []
-    except (FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, ValueError, SyntaxError):
         return []
 
 
 def save_data(path: str, data: list):
+    """Save application data as readable Python text, not JSON or SQL."""
     with open(path, "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=4)
+        file.write(repr(data))
 
 
 def generate_id(prefix: str, records: list, field: str = "id") -> str:
@@ -314,7 +320,7 @@ class Case:
 # ============================================================
 
 class DataRepository:
-    """Handles persistent JSON storage for the application."""
+    """Handles persistent text-file storage for the application."""
 
     def __init__(self):
         ensure_data_directory()
@@ -1066,7 +1072,7 @@ class DetectiveCaseManagementSystem:
             self.investigators, self.cases, self.suspects,
             self.witnesses, self.evidence
         ]):
-            print("Demo data is only loaded when the database is empty.")
+            print("Demo data is only loaded when all data files are empty.")
             return
 
         investigator = Investigator(

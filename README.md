@@ -1,197 +1,150 @@
-<div align="center">
+# Detective Case Management System
 
-# 🕵️ Detective Case Management System
+A command-line **Python Object-Oriented Programming (OOP)** project for managing fictional investigation cases.
 
-### `> investigate. link. solve. report._`
+The project is built using Python fundamentals, OOP, collections, functions, exception handling, and basic file handling. It does not require SQL, a database server, or third-party packages.
 
-A console-based **Python OOP** project for managing fictional investigation cases,<br>
-from the first suspect to the final case report.
+## Features
 
-<br>
+- Investigator registration and management
+- Case creation and assignment
+- Case status and priority management
+- Case search and filtering
+- Suspect registration and case linking
+- Witness registration and case linking
+- Evidence management
+- Evidence chain-of-custody tracking
+- Case notes and investigation timeline
+- Investigation dashboard and statistics
+- Plain-text file persistence
+- Text case-report generation
+- Demo/sample data
+- Input validation and exception handling
+- Fully command-line based
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-00f0ff?style=for-the-badge&logo=python&logoColor=white&labelColor=0d1117)
-![Dependencies](https://img.shields.io/badge/Dependencies-None-ff2e97?style=for-the-badge&labelColor=0d1117)
-![Storage](https://img.shields.io/badge/Storage-JSON-f9f871?style=for-the-badge&logo=json&logoColor=white&labelColor=0d1117)
-![Interface](https://img.shields.io/badge/Interface-Console-9d4edd?style=for-the-badge&logo=gnubash&logoColor=white&labelColor=0d1117)
-![Paradigm](https://img.shields.io/badge/Paradigm-OOP-39ff14?style=for-the-badge&labelColor=0d1117)
+## OOP Concepts Demonstrated
 
-<br>
+### Encapsulation
+Data and related operations are grouped inside classes such as `Case`, `Evidence`, `Person`, and `DetectiveCaseManagementSystem`.
 
-[✨ Features](#-features) •
-[🧠 OOP Concepts](#-oop-concepts-demonstrated) •
-[📁 Structure](#-project-structure) •
-[🚀 Quick Start](#-quick-start) •
-[🧩 Modules](#-main-modules) •
-[🗺️ Workflow](#%EF%B8%8F-example-workflow)
+### Inheritance
+`Investigator`, `Suspect`, and `Witness` inherit common attributes and methods from the `Person` class.
 
-</div>
+### Polymorphism
+The specialized person classes override `to_dict()` to add their own information while keeping the common `Person` structure.
 
----
+### Abstraction
+`DataRepository` handles file storage so the main management system does not need to deal with file operations directly.
 
-## ✨ Features
-
-```mermaid
-%%{init: {'theme':'dark','themeVariables':{'fontFamily':'monospace'}}}%%
-mindmap
-  root((Detective<br>Case System))
-    Investigators
-      Registration
-      Management
-    Cases
-      Creation and assignment
-      Status and priority
-      Search and filtering
-    People
-      Suspects
-      Witnesses
-      Case linking
-    Evidence
-      Registration
-      Chain of custody
-    Analysis
-      Dashboard and statistics
-      Investigation timeline
-      Case notes
-    System
-      JSON persistence
-      Text report generation
-      Demo data
-      Input validation
-```
-
-| | Feature | Description |
-|:-:|---|---|
-| 👮 | **Investigators** | Register and manage investigators |
-| 📂 | **Cases** | Create cases and assign them to investigators |
-| 🚦 | **Status & Priority** | Track and update case status and priority |
-| 🔍 | **Search & Filter** | Find cases quickly by criteria |
-| 🥷 | **Suspects** | Register suspects and link them to cases |
-| 👁️ | **Witnesses** | Register witnesses and link them to cases |
-| 🧪 | **Evidence** | Full evidence management |
-| 🔗 | **Chain of Custody** | Track every handover of each evidence item |
-| 📝 | **Notes & Timeline** | Keep case notes and an investigation timeline |
-| 📊 | **Dashboard** | Investigation statistics at a glance |
-| 💾 | **Auto Persistence** | Data saved automatically as JSON |
-| 📄 | **Reports** | Generate text case reports |
-| 🎭 | **Demo Data** | Fictional sample records, one menu option away |
-| 🛡️ | **Validation** | Input validation and exception handling |
-| 📦 | **Zero Dependencies** | No third-party Python packages required |
-
----
-
-## 🧠 OOP Concepts Demonstrated
-
-| Pillar | Where you'll find it |
-|---|---|
-| 🔒 **Encapsulation** | Data and behavior are grouped inside classes such as `Case`, `Evidence`, `Person`, and `DetectiveCaseManagementSystem`. |
-| 🧬 **Inheritance** | `Investigator`, `Suspect`, and `Witness` inherit common attributes and behavior from `Person`. |
-| 🎭 **Polymorphism** | Each specialized person class overrides `to_dict()` to extend the serialized form of the base class. |
-| 🧊 **Abstraction** | `DataRepository` hides how JSON files are read and written from the management system. |
-
-```mermaid
-%%{init: {'theme':'dark','themeVariables':{'fontFamily':'monospace'}}}%%
-classDiagram
-    direction TB
-    class Person {
-        +to_dict()
-    }
-    class Investigator {
-        +to_dict()
-    }
-    class Suspect {
-        +to_dict()
-    }
-    class Witness {
-        +to_dict()
-    }
-    class Case
-    class Evidence
-    class DataRepository {
-        reads and writes JSON
-    }
-    class DetectiveCaseManagementSystem
-
-    Person <|-- Investigator
-    Person <|-- Suspect
-    Person <|-- Witness
-    DetectiveCaseManagementSystem o-- Case
-    DetectiveCaseManagementSystem o-- Evidence
-    DetectiveCaseManagementSystem o-- Person
-    DetectiveCaseManagementSystem --> DataRepository : persists via
-```
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Detective-Case-Management-System/
 │
-├── 🐍 detective_case_management.py
-├── 💾 data/
-│   ├── cases.json
-│   ├── evidence.json
-│   ├── investigators.json
-│   ├── suspects.json
-│   └── witnesses.json
-├── 📄 reports/            # generated case reports appear here
-├── 📘 README.md
-├── 📋 requirements.txt
-└── 🙈 .gitignore
+├── detective_case_management.py
+├── data/
+│   ├── cases.txt
+│   ├── evidence.txt
+│   ├── investigators.txt
+│   ├── suspects.txt
+│   └── witnesses.txt
+├── reports/
+│   └── generated case reports appear here
+├── README.md
+├── requirements.txt
+└── .gitignore
 ```
 
----
+## Requirements
 
-## 🚀 Quick Start
+- Python 3.9 or newer
+- No external packages
+- No SQL/database server
+- No internet connection required
 
-### Requirements
+## Setup
 
-- 🐍 **Python 3.9** or newer
-- 📦 No external packages
+### 1. Install Python
 
-### Run it
+Install Python 3.9 or newer if it is not already installed.
 
-Open a terminal in the project directory:
+Check the installation:
 
 ```bash
-python detective_case_management.py
+python --version
 ```
 
 On some systems:
 
 ```bash
+python3 --version
+```
+
+### 2. Open the project folder
+
+Open a terminal inside the project directory:
+
+```bash
+cd Detective-Case-Management-System
+```
+
+### 3. Install dependencies
+
+There are no third-party dependencies. The project uses Python's standard library only.
+
+The `requirements.txt` file is included for completeness and contains no external packages.
+
+## Run the Project
+
+Run the following command:
+
+```bash
+python detective_case_management.py
+```
+
+On systems using `python3`:
+
+```bash
 python3 detective_case_management.py
 ```
 
-### First run
+The application starts directly in the terminal.
 
-The application automatically creates the `data` directory and the JSON database files.
+## First Run
 
-> 💡 **Tip:** choose option **`7. Load Demo Data`** from the menu to populate the system with fictional sample records.
+The program automatically creates the `data` folder and the required `.txt` files if they do not already exist.
 
----
+From the main menu, option **7 - Load Demo Data** can be used to insert fictional sample records.
 
-## 🧩 Main Modules
+## Data Storage
 
-### 📊 Dashboard
+The project uses normal `.txt` files for local data persistence. Python writes the application data to these files and reads it again when the program starts.
 
-<table>
-<tr>
-<td valign="top">
+Example:
 
-**Case metrics**
+```text
+ data/cases.txt
+ data/investigators.txt
+ data/suspects.txt
+ data/witnesses.txt
+ data/evidence.txt
+```
+
+This keeps the project simple and avoids requiring SQL or an external database server.
+
+## Main Modules
+
+### Dashboard
+
+Shows:
+
 - Total cases
 - Open cases
-- Under investigation
+- Cases under investigation
 - Solved cases
 - Closed cases
 - Cold cases
 - Critical cases
-
-</td>
-<td valign="top">
-
-**Records & insights**
 - Number of investigators
 - Number of suspects
 - Number of witnesses
@@ -199,11 +152,9 @@ The application automatically creates the `data` directory and the JSON database
 - Resolution rate
 - Cases grouped by category
 
-</td>
-</tr>
-</table>
+### Case Management
 
-### 📂 Case Management
+Allows users to:
 
 - Create cases
 - List cases
@@ -215,67 +166,43 @@ The application automatically creates the `data` directory and the JSON database
 - Add investigation notes
 - Generate text reports
 
-### 🧪 Evidence Management
+### Investigator Management
 
-- Evidence registration
-- Evidence type classification
-- Evidence status updates
-- Chain-of-custody records
-- Case-to-evidence relationships
+Allows users to:
 
----
+- Register investigators
+- View investigators
+- Deactivate investigators
+- Track assigned active cases
 
-## 💾 Data Storage
+### Suspect Management
 
-The project uses **JSON files as a lightweight local database**. Your data remains available after the application is closed.
+Allows users to:
 
-> 🔌 No internet connection or database server is required.
+- Register suspects
+- List suspects
+- Link suspects to cases
 
-```mermaid
-%%{init: {'theme':'dark','themeVariables':{'fontFamily':'monospace'}}}%%
-flowchart LR
-    A[🖥️ Console UI] --> B[DetectiveCaseManagementSystem]
-    B --> C[DataRepository]
-    C --> D[(cases.json)]
-    C --> E[(evidence.json)]
-    C --> F[(investigators.json)]
-    C --> G[(suspects.json)]
-    C --> H[(witnesses.json)]
-    B --> I[📄 reports/]
+### Witness Management
 
-    style A fill:#0d1117,stroke:#00f0ff,color:#00f0ff
-    style B fill:#0d1117,stroke:#ff2e97,color:#ff2e97
-    style C fill:#0d1117,stroke:#9d4edd,color:#9d4edd
-    style I fill:#0d1117,stroke:#f9f871,color:#f9f871
-```
+Allows users to:
 
----
+- Register witnesses
+- Store witness statements
+- Record reliability
+- Link witnesses to cases
 
-## 🗺️ Example Workflow
+### Evidence Management
 
-```mermaid
-%%{init: {'theme':'dark','themeVariables':{'fontFamily':'monospace'}}}%%
-flowchart TD
-    S1[1. Register investigator] --> S2[2. Create case]
-    S2 --> S3[3. Assign investigator]
-    S3 --> S4[4. Register suspect]
-    S4 --> S5[5. Link suspect to case]
-    S5 --> S6[6. Register witness]
-    S6 --> S7[7. Link witness to case]
-    S7 --> S8[8. Register evidence]
-    S8 --> S9[9. Update evidence status]
-    S9 --> S10[10. Add investigation notes]
-    S10 --> S11[11. Change case status]
-    S11 --> S12[12. Generate final case report]
+Allows users to:
 
-    style S1 fill:#0d1117,stroke:#00f0ff,color:#00f0ff
-    style S12 fill:#0d1117,stroke:#39ff14,color:#39ff14
-```
+- Register evidence
+- Classify evidence
+- Update evidence status
+- Track chain of custody
+- Link evidence to cases
 
-<details>
-<summary><b>📋 Same workflow as a checklist</b></summary>
-
-<br>
+## Example Workflow
 
 1. Register an investigator.
 2. Create a new case.
@@ -290,21 +217,20 @@ flowchart TD
 11. Change the case status.
 12. Generate the final case report.
 
-</details>
+## Generated Reports
 
----
+When a case report is generated, it is saved as a `.txt` file inside the `reports` directory.
 
-## ⚠️ Important Note
+For example:
 
-> [!NOTE]
-> This project is an **educational simulation**. All sample investigation records are **fictional**.
+```text
+reports/CASE0001_report.txt
+```
 
----
+## Command-Line Execution
 
-<div align="center">
+The complete project runs through the terminal. No graphical interface or separate application setup is required.
 
-**🕵️ Case closed. Happy investigating.**
+## Important Note
 
-<sub>Built with Python and zero dependencies.</sub>
-
-</div>
+This project is an educational simulation. All sample investigation records are fictional.
