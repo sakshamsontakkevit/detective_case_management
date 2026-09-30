@@ -1,9 +1,4 @@
+data/students.json
+data/app.log
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.vscode/
-.idea/
-.env
-.DS_Store
-Thumbs.db
